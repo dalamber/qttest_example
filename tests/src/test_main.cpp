@@ -1,6 +1,9 @@
 #include "test_main.h"
 
 #include "lib/src/random.h"
+#include "lib/src/downloader.h"
+
+#include <QEventLoop>
 
 void tests::Main::initTestCase() {}
 
@@ -29,4 +32,26 @@ void tests::Main::testRandomUuid()
     };
 }
 
+void tests::Main::testDownloader()
+{
+    QEventLoop loop;
+
+    auto doJob = [&]
+    {
+        auto reply = tester_lib::download(QUrl("https://as2.ftcdn.net/jpg/00/47/23/69/500_F_47236973_G2aFtkW7m0ZBH1ClnCbiNqiF16G3qcEx.jpg"));
+        QObject::connect(reply, &tester_lib::Reply<QByteArray>::ready, [reply, &loop]
+        {
+            auto isValid = reply->isValid();
+            reply->deleteLater();
+            loop.quit();
+
+            QVERIFY(reply->isValid());
+        });
+        loop.exec();
+    };
+
+    doJob();
+}
+
 void tests::Main::cleanupTestCase() {}
+

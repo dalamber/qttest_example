@@ -14,6 +14,7 @@ namespace tests
         void initTestCase();
         void testRandomNumber();
         void testRandomUuid();
+        void testDownloader();
         void cleanupTestCase();
     };
 
