@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dalamber/qttest_example.svg?branch=master)](https://travis-ci.org/dalamber/qttest_example)
+
 ### Skeleton for learning Qt Test.
 
 #### tester_lib
