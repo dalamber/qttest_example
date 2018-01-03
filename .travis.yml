@@ -1,0 +1,17 @@
+language: cpp
+
+os:
+  - osx
+
+install:
+   brew update
+   && brew unlink cmake
+   && brew install cmake
+   && brew install qt5
+   && chmod -R 755 /usr/local/opt/qt5/*
+
+script:
+  - mkdir build
+  && cd build
+  && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/usr/local/opt/qt5/lib/cmake ..
+  && make
