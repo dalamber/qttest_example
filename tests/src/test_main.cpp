@@ -43,9 +43,10 @@ void tests::Main::testDownloader()
         {
             auto isValid = reply->isValid();
             reply->deleteLater();
+
             loop.quit();
 
-            QVERIFY(reply->isValid());
+            QVERIFY(isValid);
         });
         loop.exec();
     };
